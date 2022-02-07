@@ -1,0 +1,296 @@
+#: import WipeTransition kivy.uix.screenmanager.WipeTransition
+#: import SlideTransition kivy.uix.screenmanager.SlideTransition
+#: import NoTransition kivy.uix.screenmanager.NoTransition
+WindowManager:
+    LoginWindow:
+    SignUpWindow:
+    ScanItemWindow:
+    CartWindow:
+
+
+<Rlabel@ButtonBehavior+Label>:
+<LoginWindow>:
+    transition: SlideTransition()
+    name: "login-form"
+    BoxLayout:
+        orientation: "vertical"
+    #14:54
+        orientation: "vertical"
+        spacing: "1.338cm"
+        padding: "2.04cm"
+        BoxLayout:
+            orientation: "vertical"
+            Image:
+                source: "static/images/space invaders alien type D.png"
+                size_hint_y: None
+                height: "3.160cm"
+            Label:
+                text: "Login"
+                font_size: "1.05833cm"
+
+        TextInput:
+            id: email
+            multiline: False
+            hint_text: "E-mail"
+            size_hint: None, None
+            size_hint_x: 1
+            height: "1.50cm"
+            font_size: "0.635cm"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            padding: self.height/2 - self.font_size/2
+
+        TextInput:
+            id: passw
+            multiline: False
+            size_hint: None, None
+            size_hint_x: 1
+            height: "1.549cm"
+            hint_text: "Password"
+            font_size: "0.635cm"
+            password: True
+            padding: self.height/2 - self.font_size/2
+
+        Button:
+            size_hint: None, None
+            size_hint_x: 1
+            height: "1.549cm"
+            text: "Login"
+            font_size: "0.635cm"
+            on_release:
+                print("redirecting to scan page...")
+                app.root.current = "scan" if (passw.text == "12345") else "login-form"
+                root.manager.transition.direction = "left"
+
+
+        BoxLayout:
+            orientation: "horizontal"
+            Label:
+                text: "Not a user yet?"
+                font_size: "0.352778cm"
+                halign: "center"
+            Rlabel:
+                text: "Register"
+                font_size: "0.352778cm"
+                color: 0, 1, 1, 1
+                on_release:
+                    print("redirecting to registration form...")
+                    root.manager.transition = NoTransition()
+                    app.root.current = "signup-form"
+<SignUpWindow>
+    name: "signup-form"
+    BoxLayout:
+        orientation: "vertical"
+    #14:54
+        orientation: "vertical"
+        spacing: "1.338cm"
+        padding: "2.04cm"
+        BoxLayout:
+            orientation: "vertical"
+            Image:
+                source: "static/images/space invaders alien type D.png"
+                size_hint_y: None
+                height: "3.160cm"
+            Label:
+                text: "Sign Up"
+                font_size: "1.05833cm"
+
+        TextInput:
+            multiline: False
+            hint_text: "E-mail"
+            size_hint: None, None
+            size_hint_x: 1
+            height: "1.50cm"
+            font_size: "0.635cm"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            padding: self.height/2 - self.font_size/2
+
+        TextInput:
+            multiline: False
+            hint_text: "Username"
+            size_hint: None, None
+            size_hint_x: 1
+            height: "1.50cm"
+            font_size: "0.635cm"
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            padding: self.height/2 - self.font_size/2
+
+        TextInput:
+            multiline: False
+            size_hint: None, None
+            size_hint_x: 1
+            height: "1.549cm"
+            hint_text: "Password"
+            font_size: "0.635cm"
+            password: True
+            padding: self.height/2 - self.font_size/2
+
+        Button:
+            size_hint: None, None
+            size_hint_x: 1
+            height: "1.549cm"
+            text: "Register"
+            font_size: "0.635cm"
+            on_release:
+                print("redirecting to main page...")
+                root.manager.transition = SlideTransition()
+                root.manager.transition.direction ="left"
+                app.root.current = "scan"
+
+
+
+
+
+<ScanItemWindow>
+    name: "scan"
+    BoxLayout:
+        orientation: "vertical"
+        spacing: "5cm"
+
+        BoxLayout:
+            orientation: "vertical"
+            Image:
+                source: "static/images/space invaders alien type D.png"
+                size_hint_y: None
+                height: "3.160cm"
+                pos_hint: {"x": 0}
+                pos_hint_y: {"center_y": 1}
+
+        Button:
+            text: "Scan an item"
+            size_hint: 0.8, 0
+            height: "1.549cm"
+            pos_hint:{'center_x':0.5, 'center_y':1}
+            font_size: "0.635cm"
+            on_release: print("Redirecting to login form...")
+            on_release: app.root.current = "login-form"
+            on_release: root.manager.transition.direction = "right"
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: "0.5cm"
+            size_hint: (1, 0.25)
+            Button:
+                text: "Home"
+                background_normal: ""
+                background_color: 0.39, 0.58, 0.92, 1
+                on_release:
+                    print("Redirecting to Scan...")
+                    app.root.current = "scan"
+            Button:
+                text: "Cart"
+                on_release:
+                    print("Redirecting to cart...")
+                    app.root.current = "Cart"
+                    root.manager.transition.direction = "left"
+            Button:
+                text: "account"
+
+<CartWindow>
+    name: "Cart"
+    BoxLayout:
+        orientation: "vertical"
+
+
+        BoxLayout:
+            orientation: "vertical"
+            padding:"1cm"
+
+            Image:
+                spacing:"2cm"
+                source: "static/images/space invaders alien type D.png"
+                size_hint_y: None
+                height: "3.160cm"
+                pos_hint: {"x": 0}
+                pos_hint_y: {"center_y": 1}
+        BoxLayout:
+            orientation: "horizontal"
+            halign: "center"
+
+
+
+
+            Label:
+
+                text: "Total:"
+                text_size: self.size
+                size_hint: 0.8, 0
+                halign: "center"
+                pos_hint: {"center_x": 1, "center_y": 1.5}
+                font_size: "0.635cm"
+            Label:
+
+                text: "$7.99"
+                text_size: self.size
+                size_hint: 0.8, 0
+                halign: "center"
+                pos_hint: {"center_x": 1, "center_y": 1.5}
+                font_size:"0.635cm"
+        Button:
+            padding_y:
+            pos_hint: {"center_x": 0.5, "center_y": 1.5}
+            halign: "center"
+            text: "Continue"
+            size_hint: 0.8, 0.2
+
+
+
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: "0.5cm"
+            size_hint: (1, 0.195) # the cart buttons size_hint
+
+            Button:
+                text: "Home"
+                on_release:
+                    print("Redirecting to Scan...")
+                    app.root.current = "scan"
+                    root.manager.transition.direction = "right"
+            Button:
+                text: "Cart"
+                background_normal: ""
+                background_color: 0.39, 0.58, 0.92, 1
+                on_release:
+                    print("Redirecting to Cart...")
+                    app.root.current = "Cart"
+                    root.manager.transition.direction = "left"
+            Button:
+                text: "account"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#    FloatLayout:
+#        pos: 0, 0
+#        size: root.width, root.height
+#
+#
+#        GridLayout:
+#            cols: 2
+#            pos_hint: {"x": .3, "y":.3}
+#            size_hint: None, None
+#            size: root.width * .4, root.height * .4
+#
+#            Button:
+#                text: "Button 1"
+#            Button:
+#                text: "Button 2"
+#            Button:
+#                text: "Button 3"
+#            Button:
+#                text: "Button 4"
+
+
+
